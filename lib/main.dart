@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
+import 'animated_builder.dart';
+
 class AnimatedLogo extends AnimatedWidget {
   AnimatedLogo({Key key, Animation<double> animation})
       : super(key: key, listenable: animation);
@@ -58,5 +60,6 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 }
 
 void main() {
-  runApp(LogoApp());
+//  runApp(LogoApp());
+  runApp(LogoWidget());
 }
