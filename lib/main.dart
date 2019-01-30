@@ -3,6 +3,8 @@ import 'package:flutter/animation.dart';
 
 import 'animated_builder.dart';
 
+
+// 이 파일은 example 1 부터 3 까지에 대한 예제 코드
 class AnimatedLogo extends AnimatedWidget {
   AnimatedLogo({Key key, Animation<double> animation})
       : super(key: key, listenable: animation);
@@ -61,5 +63,5 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 
 void main() {
 //  runApp(LogoApp());
-  runApp(LogoWidget());
+  runApp(LogoAppWithAnimatedBuilder());
 }
