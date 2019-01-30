@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
-import 'animated_builder.dart';
+import 'animated_builder.dart'; // example 4
+import 'simultaneous_animations.dart'; // example 5
 
 
 // 이 파일은 example 1 부터 3 까지에 대한 예제 코드
@@ -62,6 +63,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 }
 
 void main() {
-//  runApp(LogoApp());
-  runApp(LogoAppWithAnimatedBuilder());
+//  runApp(LogoApp()); // example 1 to 3
+//  runApp(LogoAppWithAnimatedBuilder()); // example 4
+  runApp(SimultaneousLogoApp()); // example 5
 }
