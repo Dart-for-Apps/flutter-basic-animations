@@ -34,7 +34,14 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    animation = Tween(begin: 0.0, end: 300.0).animate(controller);
+    animation = Tween(begin: 0.0, end: 300.0).animate(controller)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controller.forward();
+        }
+      });
     controller.forward();
   }
 
