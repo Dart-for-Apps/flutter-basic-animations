@@ -169,3 +169,10 @@ Listener를 호출하고, 일반적으로 호출된 Listener는 변경된 값에
 호출되며 해당 상태는 `AnimationStatus`에 정의되어 있다.
 
 튜토리얼 사이트에서는 이후 실제 예제를 다루고 있습니다. 홈페이지를 확인하기 바랍니다.
+
+## 예제와 관련된 이슈
+
+### 기존 위젯에 animation을 추가한 뒤 hot reload 하면 에러
+
+새로운 state 가 추가된 경우 해당 state를 사용하기 위해서는 `hot-reload`가 아닌
+`hot-restart`를 수행해야 한다.
