@@ -1,5 +1,7 @@
 # Hero Animations
 
+> [원문](https://flutter.io/docs/development/ui/animations/hero-animations#basic-structure-of-a-hero-animation)
+
 Hero Animations 챕터에서 배우는 내용은 아래와 같다
 - *hero*는 서로 다른 스크린 사이에서 공유되는 위젯을 의미한다
 - 플러터에서는 `Hero` 위젯으로 히어로 애니메이션을 구성할 수 있다.
@@ -54,4 +56,44 @@ Hero Animations 챕터에서 배우는 내용은 아래와 같다
 
 ## Basic structure of a hero animation
 
-추가 필요
+본 챕터에서 배울 내용은 아래와 같다.
+
+- 두개의 히어로 위젯을 서로 다른 스크린에서 사용하되 히어로 위젯의 태그 프로퍼티를
+일치시켜서 히어로 애니메이션을 구현한다.
+- `Navigator` 위젯을 통해서 앱의 라우팅 스택을 관리한다.
+- `Navigator`의 스택에서 새로운 라우트 (route)를 push 하거나 pop하는 것으로
+히어로 애니메이션을 트리거 할 수 있다.
+- 플러터 프레임 워크는 히어로 위젯의 크기 경계를 구분하는
+[rectangle tween](https://docs.flutter.io/flutter/animation/RectTween-class.html)을 계산하여
+애니메이션을 만드는데 사용한다. 히어로 위젯이 다른 스크린으로 옮겨가는 동안,
+항상 새로운 스크린의 최상단에 위치한다.
+
+> tween이라는 단어가 생소하다면 [이 튜토리얼](https://flutter.io/docs/development/ui/animations/tutorial)
+을 먼저 확인하고 오길 권장한다.
+
+히어로 애니메이션은 두개의 [`Hero`](https://docs.flutter.io/flutter/widgets/Hero-class.html)
+위젯을 사용하여 구현된다. 두개의 위젯중 하나는 출발 스크린에 위치하고, 하나는 다음 스크린에 위치한다.
+유저의 입장에서 보면 히어로 위젯이 마치 하나의 위젯으로 공유되는 것처럼 보인다.
+
+> 히어로 애니메이션은 `PageRoute` 사이에서만 동작하는 애니메이션이다. 이로 인해
+`PopupRoute`를 사용하는 ``showDialog()`를 통해 생성되는 Dialog` 들은 `PageRoute`가
+아니므로 히어로 애니메이션의 사용이 불가하다. 플러터가 발전하면서 추가될 가능성이
+있으므로 궁금한 사람은 [이 링크](https://github.com/flutter/flutter/issues/10667)를
+확인해보자.
+
+히어로 애니메이션을 사용하는 코드는 아래와 같은 구조를 갖는다.
+
+1. *source hero*라고 칭하는 시작 히어로 위젯을 정의한다. 히어로 위젯은 화면에
+보여질 모습 (일반적으로 이미지)를 정의하고, 히어로 위젯을 구분할 `tag`를 지정한다.
+2. *destination hero*라고 칭하는 종료 히어로 위젯을 정의한다. 이 휘젯 또한
+화면에 보여질 모습을 정의하고, 위의 시작 히어로 위젯의 `tag`와 동일한 `tag`를
+지정한다. 히어로 애니메이션을 사용하기 위해서는 반드시 둘의 `tag`가 완벽히
+일치해야 한다. 가장 최고의 결과를 보여주기 위해서는, 두개의 히어로 위젯이
+같은 위젯 트리 구조를 갖는 것이 좋다.
+3. destination hero가 위치하는 스크린을 부를 라우트를 생성한다.
+4. destinatio 라우트를 `Navigator`의 스택에 push한다. `Navigator`의 push/pop
+오퍼레이션을 통해 히어로 애니메이션을 트리거 할 수 있다.
+
+플러터는 자동적으로 `tween`을 측정하여 각 히어로 위젯들의 경계선을 계산하고
+화면의 최상단 스택에서 히어로 애니메이션을 실행시킨다.
+
