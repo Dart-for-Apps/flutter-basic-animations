@@ -97,3 +97,75 @@ Hero Animations 챕터에서 배우는 내용은 아래와 같다
 플러터는 자동적으로 `tween`을 측정하여 각 히어로 위젯들의 경계선을 계산하고
 화면의 최상단 스택에서 히어로 애니메이션을 실행시킨다.
 
+## Behind the scenes
+
+본 챕터에서는 실제로 히어로 애니메이션이 기술적으로 어떻게 동작하는지에 대해서 다룬다.
+
+##### 0) 히어로 위젯 이동 직전
+
+![0. before transition](./doc-images/flutter-transition0.png)
+
+히어로 위젯의 이동이 발생하기 전의 플러터 앱 상태는 위와 같다. 시작 히어로는
+원래의 위치에 존재하고, 오버레이 뷰가 생성된다. 이 때에 아직 목적지 라우트 뷰는
+생성되지 않은 상태이다.
+
+##### 1) 목적 라우트 뷰가 Navigator에 push된 경우 - 히어로 이동 시작
+
+![1. transition begins](./doc-images/flutter-transition1.png)
+
+새로운 목적 라우트 뷰를 `Navigator`에 push하는 순간 히어로 애니메이션이 트리거 된다.
+시작 시간인 t=0.0인 상태에서 플러터는 아래와 같은 작업을 진행한다.
+
+- 히어로 위젯의 최종 목적지 위치를 계산만 하고 해당 위치에서 위젯을 제거한다.
+- 목적 라우트에서 사용되는 히어로 위젯으로 미리 위젯을 변경하고, 크기, 모양, 위치는
+기존 히어로 위젯과 동일하게 유지한 채로 오버레이 스크린에 위치시킨다. 이때에
+위젯의 `Z`축 값을 변화시켜 항상 모든 스크린들의 가장 앞에 보여질 수 있도록 조정한다.
+- 시작 라우트 뷰에서 해당 히어로 위젯을 제거한다.
+
+##### 2) 애니메이션 도중
+
+![in flight](./doc-images/flutter-transition2.png)
+
+히어로 애니메이션이 실행 되는 중에는 `Tween<Rect>`를 통해 위젯의 경계 및 크기를
+계산 하여 애니메이션을 수행한다. 히어로 위젯의 `createRectTween` 프로퍼티를
+조절하여 애니메이션의 행동을 조종할 수 있다. 기본적으로 플러터는 [MaterialRectArcTween](https://docs.flutter.io/flutter/material/MaterialRectArcTween-class.html)을
+사용한다.
+
+##### 3) 애니메이션 완료 이후
+
+![after transition](./doc-images/flutter-transition3.png)
+
+애니메이션이 끝난 이후 아래의 작업을 수행한다.
+
+- 오버레이 스크린에 위치한 최종 히어로 위젯을 목적 라우트 스크린으로 이동시키고, 오버레이 스크린을 비운다.
+- 최종 라우트 스크린을 렌더링해서 보여준다.
+- 시작 라우트 스크린에 원본 히어로 위젯을 다시 생성한다.
+
+----
+
+Navigator에서 `pop`을 수행할 때에도 이와 동일한 작업을 통해 히어로 애니메이션을 구현한다.
+
+### 히어로 위젯을 위한 필수 클래스들 (Essential classes)
+
+본 문서의 예제에서 사용하는 클래스들은 아래와 같다.
+
+**[Hero](https://docs.flutter.io/flutter/widgets/Hero-class.html)**
+
+실제로 시작 뷰 부터 목적 뷰까지 이동하면서 보여줄 위젯이다. 시작 스크린과 목적 스크린에
+모두 구현을 해야 하며, 같은 `tag`를 부여하면 된다. 플러터는 `tag`가 같은 히어로 위젯을
+구분하여 히어로 애니메이션을 실행한다.
+
+**[InkWell](https://docs.flutter.io/flutter/material/InkWell-class.html)**
+
+위젯을 `tap` 했을 때 어떤 작업을 수행할 지 정의할 수 있는 서포트 위젯이다.
+`onTap()` 메소드를 통해 Navigator의 행동을 조절한다.
+
+**[Navigator](https://docs.flutter.io/flutter/widgets/Navigator-class.html)**
+
+라우트 스택을 관리하는 클래스이다. `push` 혹은 `pop`을 통해 관리하며, 이 스택이
+변화할 경우 히어로 애니메이션이 트리거 된다.
+
+**[Route](https://docs.flutter.io/flutter/widgets/Route-class.html)**
+
+새 라우트의 스크린이나 페이지를 정의하는데 사용된다. 대부분의 앱들이 많은 라우트로
+구성된다.
