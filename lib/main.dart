@@ -4,6 +4,8 @@ import 'package:flutter/animation.dart';
 import 'animated_builder.dart'; // example 4
 import 'simultaneous_animations.dart'; // example 5
 
+import 'hero_animations/standard_hero.dart'; // standard hero animation
+
 
 // 이 파일은 example 1 부터 3 까지에 대한 예제 코드
 class AnimatedLogo extends AnimatedWidget {
@@ -65,5 +67,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 void main() {
 //  runApp(LogoApp()); // example 1 to 3
 //  runApp(LogoAppWithAnimatedBuilder()); // example 4
-  runApp(SimultaneousLogoApp()); // example 5
+//  runApp(SimultaneousLogoApp()); // example 5
+  runApp(MaterialApp(
+    home: HeroAnimation(),
+  )); // 기본 히어로 애니메이션
 }
