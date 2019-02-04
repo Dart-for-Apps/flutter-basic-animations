@@ -169,3 +169,12 @@ Navigator에서 `pop`을 수행할 때에도 이와 동일한 작업을 통해 �
 
 새 라우트의 스크린이나 페이지를 정의하는데 사용된다. 대부분의 앱들이 많은 라우트로
 구성된다.
+
+## 예제
+
+예제는 따로 번역하지 않고, 각각의 코드에 필요한 경우 해설을 추가해 두었다.
+자신이 직접 보면서 이해해 보도록하고, 이해하지 못할 경우 issue에 남기거나
+홈페이지 원문을 참조하도록 하자.
+
+- [Standard hero animation](lib/hero_animations/standard_hero.dart)
+- [Radial hero animations](lib/hero_animations/radial_hero.dart)
