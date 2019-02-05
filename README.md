@@ -3,6 +3,7 @@
 
 - [기본 튜토리얼](./README.md)
 - [Hero Animations](./hero-animations.md)
+- [Staggered Animations](./staggered-animations.md)
 
 > 본 저장소에서 제공하는 해설은 튜토리얼 사이트의 단순 번역 입니다.
 공부할때에는 직접 원문을 참고하시는것을 추천합니다. 번역은 개인 의견이
