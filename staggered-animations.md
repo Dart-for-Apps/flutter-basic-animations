@@ -1,5 +1,7 @@
 # Staggered Animations
 
+> [원문](https://flutter.io/docs/development/ui/animations/staggered-animations)
+
 이번 챕터에서 배울 내용은 아래와 같다.
 - Staggered animation은 연속되거나 겹치는 여러 애니메이션으로 구성된다.
 - Staggered animation을 만들기 위해서는 다수의 `Animation` 객체를 사용해야 한다.
@@ -51,4 +53,6 @@ animation이다. 애니메이션들은 겹치는 부분 없이 한 애니메이�
 
 이후에는 다시 반대 순서로 원래 크기로 돌아간다.
 
-> 이후 설명 추가 예정, 코드도 추가 예정
+> 이후의 예제코드는 쉬우므로 예제 코드에 대한 번역은 제외합니다. 일부
+한글 주석을 예제에 써 놓았으니 [staggered_animation.dart](./lib/staggered_animation.dart)를
+참조하시기 바랍니다.

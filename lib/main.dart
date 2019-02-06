@@ -7,6 +7,8 @@ import 'simultaneous_animations.dart'; // example 5
 import 'hero_animations/standard_hero.dart'; // standard hero animation
 import 'hero_animations/radial_hero.dart'; // radial animation 예제
 
+import 'staggered_animation.dart'; // stagger animation 예제
+
 
 // 이 파일은 example 1 부터 3 까지에 대한 예제 코드
 class AnimatedLogo extends AnimatedWidget {
@@ -73,6 +75,7 @@ void main() {
 //    home: HeroAnimation(),
 //  )); // 기본 히어로 애니메이션
   runApp(MaterialApp(
-    home: RadialExpansionDemo(),
+//    home: RadialExpansionDemo(), // radial 히어로 애니메이션 예제
+    home: StaggerDemo(),
   )); //radial 히어로 애니메이션
 }
